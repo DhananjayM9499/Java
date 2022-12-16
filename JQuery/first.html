@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .chamkila {
+            background-color: rgb(252, 243, 0);
+        }
+    </style>
+
+</head>
+
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("p").click(function () {
+                $(this).hide();
+            });
+            $(".chamkila").click(function () {
+                alert("div2 is selected")
+            });
+            $("#div").click(function () {
+                $(this).alert("div 2 is selected")
+            })
+        });
+    </script>
+    <h2>Chamkila chamgadad</h2>
+    <p>If you click on me, I will disappear.</p>
+    <p>Click me away!</p>
+    <p>Click me too!</p>
+    <div> this is div 2</div>
+
+</body>
+
+</html>

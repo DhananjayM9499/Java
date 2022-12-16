@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("img").click(function () {
+                $("#demo").append(" <br>clicked.");
+            });
+            $("img").dblclick(function () {
+                $("#demo").append("<br> double click");
+            });
+            $("img").mouseenter(function () {
+                $("#demo").append("<br> mouse entered");
+            });
+            $("img").mouseover(function () {
+                $("#demo").append("<br> Mouse over");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <img src="/javaScript/wallpaperflare.com_wallpaper.jpg" alt="" height="300px">
+    <br></br>
+    <div id="demo"> this is a jquery event demo</div>
+</body>
+
+</html>

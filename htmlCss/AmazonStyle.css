@@ -1,0 +1,31 @@
+* {
+margin: 0;
+padding: 0;
+}
+table,
+th,
+td,
+tr {
+border-width: 15px;
+border-color: rgb(246, 232, 216);
+border-style: solid;
+border-collapse: collapse;
+width: 500px;
+}
+.image {
+height: 400px;
+width: 300px;
+}
+.Mybutton {
+border-width: 1px;
+border-radius: 25%;
+padding: 6px;
+white-space: nowrap;
+font-weight: 700;
+color: #ffffff;
+background: #cc0c39;
+}
+body {
+font-weight: lighter;
+text-decoration: solid;
+}

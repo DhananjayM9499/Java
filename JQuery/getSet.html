@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="/JQuery/getset.js"></script>
+<style>
+    div {
+        padding-top: 20px;
+    }
+
+    #main {
+        height: 500px;
+        width: 700px;
+    }
+
+    #left {
+        width: 350px;
+        height: 500px;
+        float: left;
+    }
+
+    #right {
+        width: 350px;
+        height: 500px;
+        float: left;
+    }
+
+    .leftcol {
+        height: 100px;
+        width: 350px;
+        text-align: center;
+    }
+
+    #rightcol1 {
+        height: 100px;
+        width: 350px;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div id="main">
+        <div id="left">
+            <div class="leftcol">Sign Up</div>
+            <div class="leftcol">
+                <input type="text" id="name" placeholder="Enter your Name" />
+            </div>
+            <div class="leftcol">
+                <input type="number" id="age" placeholder="Enter your Age" />
+            </div>
+            <div class="leftcol">
+                <input type="text" id="address" placeholder="Enter your Address" />
+            </div>
+            <div class="leftcol">
+                <button id="validate">Validate</button>
+                <button id="show">Show</button>
+            </div>
+        </div>
+        <div id="right">
+            <div id="rightcol1">Result</div>
+            <div id="rightcol2">
+                <textarea id="textarea" cols="40" rows="20"></textarea>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
