@@ -7,10 +7,11 @@ const app = express(); //server created
 const path = require("path");
 const trendingTShirt = require("./product-list");
 const bodyParser = require("body-parser");
+const ejs = require("ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true })); //use this parser
-
+app.set("view engine", "ejs");
 app.listen(8888, () => console.log("Express Server started at 8888")); // starts a server and enters the port value and a starting message.
 
 app.get("/", (req, resp) => {
