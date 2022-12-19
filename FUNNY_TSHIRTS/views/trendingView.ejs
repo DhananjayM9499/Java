@@ -27,9 +27,17 @@
 </head>
 
 <body>
-  <div class="jumbotron">
-    <h1>Great tShirts at cost of NULL!</h1>
-  </div>
+  <h3>Trending TShirts</h3>
+
+  <% tShirt.forEach( function(tShirtObj){ %>
+    <div>
+      <h3><a href="/product/<%= tShirtObj.id %>">
+          <%= tShirtObj.quote %>
+        </a></h3>
+      Price: <%= tShirtObj.price %>
+    </div>
+    <hr />
+    <% }); %>
 </body>
 
 </html>

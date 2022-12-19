@@ -1,40 +1,48 @@
-const http = require("http");
-const fs = require("fs");
-const url = require("url");
-const hostName = "127.0.0.1";
-const port = 8888;
-console.log("Preparing server....");
-const server = http.createServer((req, res) => {
-  console.log("-----------URL" + req.url);
-  var q = url.parse(req.url, true);
-  console.log("host : " + q.host);
-  console.log("pathName : " + q.pathname);
-  console.log("search : " + q.search);
-  let fileName = "index.html";
-  if (q.pathname === "/") {
-    fileName = "index.html";
-  } else if (q.pathname === "/contact-us") {
-    fileName = "contact-us.html";
-  } else if (q.pathname === "/about-us") {
-    fileName = "about-us.html";
-  } else if (q.pathname === "/search") {
-    //http://localhost:8888/search?name=Dhananjay&mood=thanda
-    let searchData = q.query;
-    console.log(JSON.stringify(searchData));
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write("<h2>Search Page</h2> You Searched for: " + searchData.topic);
-    return res.end();
-  } else {
-    myReadFile("index.html", res);
-  }
+//1. list t-shirts - json, unique product
+//2. diff between get & post, admin: form to add t-Shirt
+
+const express = require("express");
+const app = express();
+const path = require("path");
+const trendingTShirts = require("./product-list");
+const bodyParser = require("body-parser");
+const ejs = require("ejs");
+
+app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set("view engine", "ejs");
+
+app.listen(8888, () => console.log("Express Server started at 8888 "));
+
+app.get("/product/trending", (req, resp) => {
+  resp.status(200);
+  // resp.json(trendingTShirts);
+  resp.render("trendingView", { tShirts: trendingTShirts });
 });
-function myReadFile(fileName, res) {
-  fs.readFile(fileName, function (err, data) {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write(data);
-    return res.end();
+
+app.get("/product/:productId", (req, resp) => {
+  resp.status(200);
+  console.log("productId:" + req.params.productId);
+  //   resp.json(trendingTShirts[req.params.productId - 1]);
+  resp.render("productDetailView", {
+    tShirt: trendingTShirts[req.params.productId - 1],
   });
-}
-server.listen(port, hostName, () => {
-  console.log("server is running at " + hostName + "port : " + port);
+});
+
+app.get("/admin/new", (req, resp) => {
+  resp.sendFile(__dirname + "/public/new-product.html");
+});
+
+app.post("/admin/addProduct", (req, resp) => {
+  //collect all info, prepare tshirt, tShirt update list
+  const body = req.body;
+  const tShirt = {
+    id: trendingTShirts.length + 1,
+    color: body.color,
+    size: body.size,
+    quote: body.quote,
+    price: body.price,
+  };
+  trendingTShirts.push(tShirt);
+  resp.send("Added tShirt with Quote: " + tShirt.quote);
 });

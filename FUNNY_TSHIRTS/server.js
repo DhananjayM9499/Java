@@ -21,14 +21,18 @@ app.get("/", (req, resp) => {
 
 app.get("/product/trending", (req, resp) => {
   resp.status(200);
-  resp.json(trendingTShirt); // content type controller
+  //resp.json(trendingTShirt); // content type controller
+  resp.render("trendingView", { tShirt: trendingTShirt });
 });
 
 app.get("/product/:productId", (req, resp) => {
   resp.status(200);
   console.log("product Id : " + req.params.productId);
-  let productNumber = req.params.productId - 1;
-  resp.json(trendingTShirt[productNumber]); // content type controller
+  //let productNumber = req.params.productId - 1;
+  //resp.json(trendingTShirt[productNumber]); // content type controller
+  resp.render("productDetailView", {
+    tShirt: trendingTShirt[req.params.productId - 1],
+  });
 });
 
 app.get("/admin/new", (req, resp) => {
