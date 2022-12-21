@@ -1,59 +1,52 @@
-// import React from "react";
-// import ReactDOM from "react-dom/client";
-// import "./index.css";
-// import App from "./App";
-//import Person from "./Person/Person";
-// import Person2 from "./Person/Person2";
-// import reportWebVitals from "./reportWebVitals";
-// import Football from "./Football/Football";
-// import Car from "./Car/Car";
-//const root = ReactDOM.createRoot(document.getElementById("root"));
-
-// var appContent = (
-//   <div>
-//     <Person name="Dhananjay" title="Drunk" />
-//     <Person name="Rutuja" title="life changer" />
-//     <Person name="Life goal" title="paisa" />
-//   </div>
-// );
-
-// var appContent = (
-//   <div>
-//     <Person2 name="Dhananjay" hobbies="Drinking" />
-//     <Person2 name="Rutuja" hobbies="Dance" />
-//     <Person2 name="Life goal" hobbies="Maya" />
-//   </div>
-// );
-// var app = (
-//   <div>
-//     <br />
-//     <Football />
-//   </div>
-// );
-// var app = (
-//   <div>
-//     <br />
-//     <Car />
-//     <br />
-//     <Car />
-//   </div>
-// );
 import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import "./Clock/Clock.js";
-import "./Clock/Clock.css";
+import ReactDOM from "react-dom/client";
+import { createStore } from "redux";
 
-const root = ReactDOM.render(<App />, document.getElementById("root"));
-var app = (
-  <div>
-    <clock />
-  </div>
-);
+//reducer
+function counterReducer(state = 0, action) {
+  if (action.type === "INCREMENT") {
+    return state + 1;
+  } else if (action.type === "DECREMENT") {
+    return state - 1;
+  } else if (action.type === "RESET") {
+    return (state = 0);
+  } else return state;
+}
 
-root.render(app);
+//store
+const store = createStore(counterReducer);
+store.subscribe(() => {
+  console.log("store changed:" + JSON.stringify(store.getState()));
+});
 
-// const root = ReactDOM.createRoot(document.getElementById("root"));
-// root.render(appContent);
-//root.render(app);
+//action
+function increment() {
+  const action = { type: "INCREMENT" };
+  store.dispatch(action);
+}
+
+function decrement() {
+  const action = { type: "DECREMENT" };
+  store.dispatch(action);
+}
+function reset() {
+  const action = { type: "RESET" };
+  store.dispatch(action);
+}
+
+const Counter = () => {
+  let count = store.getState();
+  return (
+    <div>
+      <h1>Counter: {count} </h1>
+      <button onClick={increment}>Increment</button> &nbsp;&nbsp;
+      <button onClick={decrement}>Decrement</button> &nbsp;&nbsp;
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+const myRender = () => root.render(<Counter />);
+myRender();
+store.subscribe(myRender);
